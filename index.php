@@ -1,4 +1,15 @@
-<?
+<?php
+
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU General Public License for more details.
+
 
 if (isset($_GET['source']))
 {
@@ -6,6 +17,7 @@ if (isset($_GET['source']))
     exit(0);
 }
 
+// Source code of psf can be found at http://github.com/benapetr/psf
 require ('psf/psf.php');
 require ('pg.php');
 
@@ -35,7 +47,7 @@ $html->AppendHtmlLine("Random letters and numbers and special symbols (16): " . 
 $html->AppendHtmlLine("Random letters and numbers and special symbols (64): " . htmlspecialchars($gen1->Random(64)) . "<br>");
 
 # Link to source code
-$html->AppendHtmlLine("<p>Source code: <a href=\"?source\">show</a></p>");
+$html->AppendHtmlLine("<p>Source code: <a href=\"index.php?source\">index.php</a> <a href=\"pg.php?source\">pg.php</a></p>");
 
 
 $html->PrintHtml();
