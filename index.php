@@ -41,7 +41,7 @@ $html->AppendHtmlLine("<p>Because you probably just want a random password here 
 $gen1 = new pg();
 $html->AppendHtmlLine("Random letters and numbers (8): " . $gen1->Random() . "<br>");
 $html->AppendHtmlLine("Random letters and numbers (16): " . $gen1->Random(16) . "<br>");
-$gen1->letters .= "!@//$%^&*()_+{}[];',./<>";
+$gen1->letters .= "!@\\$%^&*()_+{}[];',./<>";
 $html->AppendHtmlLine("Random letters and numbers and special symbols (8): " . htmlspecialchars($gen1->Random(8)) . "<br>");
 $html->AppendHtmlLine("Random letters and numbers and special symbols (16): " . htmlspecialchars($gen1->Random(16)) . "<br>");
 $html->AppendHtmlLine("Random letters and numbers and special symbols (64): " . htmlspecialchars($gen1->Random(64)) . "<br>");
