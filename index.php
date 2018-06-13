@@ -22,29 +22,34 @@ require ('psf/psf.php');
 require ('pg.php');
 
 $html = new HtmlPage('Random password generator');
-$github_ribbon = new GitHub_Ribbon();
-$github_ribbon->Repository = "benapetr/rpg";
+$html->Style->items['code']['font-family'] = 'monospace';
+$html->Style->items['code']['font-size'] = '16px';
+$html->Style->items['code']['background-color'] = '#C4F0FF';
 
 // Fork me ribbon
-$html->AppendHtmlLine($github_ribbon->ToHtml());
+$html->AppendObject(new GitHub_Ribbon("benapetr/rpg"));
 
 // Title
-$html->AppendHtmlLine("<h1>Random password generator - RPG</h1>");
+$html->AppendHeader("Random password generator - RPG");
 
 // Description
-$html->AppendHtmlLine("<h2>How to use</h2>");
-$html->AppendHtmlLine("<p>This page let you generate random passwords, unlike other web based password generators, this one is open source. If you don't trust it, just fork it on github and run it on your own web server.</p>");
+$html->AppendHeader("How to use", 2);
+$html->AppendParagraph("This page let you generate random passwords, unlike other web based password generators, this one is open source. If you don't trust it, just fork it on github and run it on your own web server.");
 
-$html->AppendHtmlLine("<h2>Some prebaked passwords for you</h2>");
-$html->AppendHtmlLine("<p>Because you probably just want a random password here I prepared some for you, if you don't like them you can generate different ones by pressing f5:</p>");
+$html->AppendHeader("Some prebaked passwords for you", 2);
+$html->AppendParagraph("Because you probably just want a random password here I prepared some for you, if you don't like them you can generate different ones by pressing f5:");
 
 $gen1 = new pg();
-$html->AppendHtmlLine("Random letters and numbers (8): " . $gen1->Random() . "<br>");
-$html->AppendHtmlLine("Random letters and numbers (16): " . $gen1->Random(16) . "<br>");
-$gen1->letters .= "!@\\$%^&*()_+{}[];',./<>";
-$html->AppendHtmlLine("Random letters and numbers and special symbols (8): " . htmlspecialchars($gen1->Random(8)) . "<br>");
-$html->AppendHtmlLine("Random letters and numbers and special symbols (16): " . htmlspecialchars($gen1->Random(16)) . "<br>");
-$html->AppendHtmlLine("Random letters and numbers and special symbols (64): " . htmlspecialchars($gen1->Random(64)) . "<br>");
+$html->AppendHtmlLine("Random letters and numbers (8): <code>" . $gen1->Random() . "</code><br>");
+$html->AppendHtmlLine("Random letters and numbers (16): <code>" . $gen1->Random(16) . "</code><br>");
+$gen1->letters .= "!@$%^&()_+{}[];,.#";
+$html->AppendHtmlLine("Random letters and numbers and special symbols (8): <code>" . htmlspecialchars($gen1->Random(8)) . "</code><br>");
+$html->AppendHtmlLine("Random letters and numbers and special symbols (16): <code>" . htmlspecialchars($gen1->Random(16)) . "</code><br>");
+$html->AppendHtmlLine("Random letters and numbers and special symbols (64): <code>" . htmlspecialchars($gen1->Random(64)) . "</code><br>");
+$gen1->letters .= "~-=|?\"\\*#'/<>";
+$html->AppendHtmlLine("Random letters and numbers and hardcore special symbols (8): <code>" . htmlspecialchars($gen1->Random(8)) . "</code><br>");
+$html->AppendHtmlLine("Random letters and numbers and hardcore special symbols (16): <code>" . htmlspecialchars($gen1->Random(16)) . "</code><br>");
+$html->AppendHtmlLine("Random letters and numbers and hardcore special symbols (64): <code>" . htmlspecialchars($gen1->Random(64)) . "</code><br>");
 
 // Link to source code
 $html->AppendHtmlLine("<p>Source code: <a href=\"index.php?source\">index.php</a> <a href=\"pg.php?source\">pg.php</a></p>");
