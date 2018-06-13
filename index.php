@@ -22,37 +22,44 @@ require ('psf/psf.php');
 require ('pg.php');
 
 $html = new HtmlPage('Random password generator');
-$html->Style->items['code']['font-family'] = 'monospace';
-$html->Style->items['code']['font-size'] = '16px';
+
+// Let's use bootstrap
+bootstrap_init($html);
 $html->Style->items['code']['background-color'] = '#C4F0FF';
 
+// Put everything into a fluid container
+$body = new BS_FluidContainer($html);
+$html->AppendObject($body);
+
 // Fork me ribbon
-$html->AppendObject(new GitHub_Ribbon("benapetr/rpg"));
+$body->AppendObject(new GitHub_Ribbon("benapetr/rpg"));
 
 // Title
-$html->AppendHeader("Random password generator - RPG");
+$body->AppendHeader("Random password generator - RPG");
 
 // Description
-$html->AppendHeader("How to use", 2);
-$html->AppendParagraph("This page let you generate random passwords, unlike other web based password generators, this one is open source. If you don't trust it, just fork it on github and run it on your own web server.");
+$body->AppendHeader("How to use", 2);
+$body->AppendParagraph("This page let you generate random passwords, unlike other web based password generators, this one is open source. If you don't trust it, just fork it on github and run it on your own web server.");
 
-$html->AppendHeader("Some prebaked passwords for you", 2);
-$html->AppendParagraph("Because you probably just want a random password here I prepared some for you, if you don't like them you can generate different ones by pressing f5:");
+$body->AppendHeader("Some prebaked passwords for you", 2);
+$body->AppendParagraph("Because you probably just want a random password here I prepared some for you, if you don't like them you can generate different ones by pressing f5:");
+
+$w = new BS_Well($html);
+$body->AppendObject($w);
 
 $gen1 = new pg();
-$html->AppendHtmlLine("Random letters and numbers (8): <code>" . $gen1->Random() . "</code><br>");
-$html->AppendHtmlLine("Random letters and numbers (16): <code>" . $gen1->Random(16) . "</code><br>");
+$w->AppendHtmlLine("Random letters and numbers (8): <code>" . $gen1->Random() . "</code><br>");
+$w->AppendHtmlLine("Random letters and numbers (16): <code>" . $gen1->Random(16) . "</code><br>");
 $gen1->letters .= "!@$%^&()_+{}[];,.#";
-$html->AppendHtmlLine("Random letters and numbers and special symbols (8): <code>" . htmlspecialchars($gen1->Random(8)) . "</code><br>");
-$html->AppendHtmlLine("Random letters and numbers and special symbols (16): <code>" . htmlspecialchars($gen1->Random(16)) . "</code><br>");
-$html->AppendHtmlLine("Random letters and numbers and special symbols (64): <code>" . htmlspecialchars($gen1->Random(64)) . "</code><br>");
+$w->AppendHtmlLine("Random letters and numbers and special symbols (8): <code>" . htmlspecialchars($gen1->Random(8)) . "</code><br>");
+$w->AppendHtmlLine("Random letters and numbers and special symbols (16): <code>" . htmlspecialchars($gen1->Random(16)) . "</code><br>");
+$w->AppendHtmlLine("Random letters and numbers and special symbols (64): <code>" . htmlspecialchars($gen1->Random(64)) . "</code><br>");
 $gen1->letters .= "~-=|?\"\\*#'/<>";
-$html->AppendHtmlLine("Random letters and numbers and hardcore special symbols (8): <code>" . htmlspecialchars($gen1->Random(8)) . "</code><br>");
-$html->AppendHtmlLine("Random letters and numbers and hardcore special symbols (16): <code>" . htmlspecialchars($gen1->Random(16)) . "</code><br>");
-$html->AppendHtmlLine("Random letters and numbers and hardcore special symbols (64): <code>" . htmlspecialchars($gen1->Random(64)) . "</code><br>");
+$w->AppendHtmlLine("Random letters and numbers and hardcore special symbols (8): <code>" . htmlspecialchars($gen1->Random(8)) . "</code><br>");
+$w->AppendHtmlLine("Random letters and numbers and hardcore special symbols (16): <code>" . htmlspecialchars($gen1->Random(16)) . "</code><br>");
+$w->AppendHtmlLine("Random letters and numbers and hardcore special symbols (64): <code>" . htmlspecialchars($gen1->Random(64)) . "</code><br>");
 
 // Link to source code
-$html->AppendHtmlLine("<p>Source code: <a href=\"index.php?source\">index.php</a> <a href=\"pg.php?source\">pg.php</a></p>");
-
+$body->AppendHtmlLine("<p>Source code: <a href=\"index.php?source\">index.php</a> <a href=\"pg.php?source\">pg.php</a></p>");
 
 $html->PrintHtml();
