@@ -1,2 +1,4 @@
 # rpg
-Random password generator :o
+Random password generator
+
+https://petr.insw.cz/devel/rpg/
